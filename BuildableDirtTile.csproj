@@ -112,6 +112,27 @@
             AssemblyFileRevisionType="AutoIncrement" />
     </Target>
 
+    <Target
+        Name="UpdateModVersion"
+        AfterTargets="CopyFilesToOutputDirectory">
+        <MSBuild.ExtensionPack.Framework.Assembly
+            TaskAction="GetInfo"
+            NetAssembly="$(TargetDir)$(TargetName).dll">
+            <Output
+                TaskParameter="OutputItems"
+                ItemName="Info" />
+        </MSBuild.ExtensionPack.Framework.Assembly>
+        <PropertyGroup>
+            <ModInfoTemplate>$(ProjectDir)yaml\mod_info.template.yaml</ModInfoTemplate>
+            <ModInfo>$(ProjectDir)yaml\mod_info.yaml</ModInfo>
+        </PropertyGroup>
+        <WriteLinesToFile
+            File="$(ModInfo)"
+            Lines="$([System.IO.File]::ReadAllText($(ModInfoTemplate)).Replace('%MOD_VERSION%','%(Info.FileVersion)'))"
+            Overwrite="true"
+            Encoding="UTF-8" />
+    </Target>
+
     <!-- Build Events -->
     <PropertyGroup>
         <PostBuildEvent>
