@@ -129,8 +129,7 @@
         <WriteLinesToFile
             File="$(ModInfo)"
             Lines="$([System.IO.File]::ReadAllText($(ModInfoTemplate)).Replace('%MOD_VERSION%','%(Info.FileVersion)'))"
-            Overwrite="true"
-            Encoding="UTF-8" />
+            Overwrite="true" />
     </Target>
 
     <!-- Build Events -->
@@ -140,6 +139,7 @@
 
       echo F | xcopy /Y /S /R /Q "$(TargetDir)$(TargetName)-merged.dll" "$(ReleaseDir)$(TargetName)\$(TargetName)-merged.dll"
       IF EXIST "$(ProjectDir)anim" xcopy /Y /R /I /E /Q  "$(ProjectDir)anim" "$(ReleaseDir)$(TargetName)\anim"
+      IF EXIST "$(ProjectDir)yaml" xcopy /Y /R /I /E /Q  "$(ProjectDir)yaml" "$(ReleaseDir)$(TargetName)"
       IF EXIST "$(ProjectDir)config.json" echo F | xcopy /Y /S /R /Q "$(ProjectDir)config.json" "$(ReleaseDir)$(TargetName)\config.json"
       IF EXIST "$(ProjectDir)imgs\preview.png" echo F | xcopy /Y /S /R /Q "$(ProjectDir)imgs\preview.png" "$(ReleaseDir)previews\$(TargetName).png"
 
