@@ -71,7 +71,7 @@
             <HintPath>..\vendor\ONI-DLC\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
         <Reference Include="CaiLib">
-            <HintPath>..\vendor\CaiLib.dll</HintPath>
+            <HintPath>vendor\CaiLib.dll</HintPath>
         </Reference>
     </ItemGroup>
 
